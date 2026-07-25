@@ -4,6 +4,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { NotificationListener } from "@/components/notifications/NotificationListener";
 import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -46,6 +47,7 @@ export default function RootLayout({
           <main className="flex-1 flex flex-col">
             {children}
           </main>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand-brown: #5C3A1E;
+  --color-brand-brown-light: #8B5E3C;
+  --color-brand-rose: #C47FA0;
+  --color-brand-rose-light: #E8B4CC;
+
+  color-scheme: light;
+
+  /* Mode Clair par défaut */
+  --color-bg-primary: #faf7f5;
+  --color-bg-secondary: #f3ece6;
+  --color-bg-card: #fffdfb;
+  --color-text-primary: #2a221c;
+  --color-text-muted: #76675d;
+  --app-border: #e6d8ce;
+  --app-input: #f7f2ee;
+  --app-ring: #8b5e3c;
+  --app-card-foreground: #2a221c;
+  --app-primary-foreground: #ffffff;
+  --app-destructive: #b91c1c;
+  --app-destructive-foreground: #ffffff;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* Mode Sombre Adouci (moins prononcé que le noir pur) */
+  --color-bg-primary: #1f1915;
+  --color-bg-secondary: #2b231d;
+  --color-bg-card: #362c25;
+  --color-text-primary: #f5ede8;
+  --color-text-muted: #b29f91;
+  --app-border: #4a3a31;
+  --app-input: #2f261f;
+  --app-ring: #e8b4cc;
+  --app-card-foreground: #f5ede8;
+  --app-primary-foreground: #ffffff;
+  --app-destructive: #f87171;
+  --app-destructive-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-brand: var(--color-brand-brown);
+  --color-brand-light: var(--color-brand-brown-light);
+  --color-rose: var(--color-brand-rose);
+  --color-rose-light: var(--color-brand-rose-light);
+
+  --color-primary: #5C3A1E;
+  --color-primary-hover: #452A14;
+  --color-secondary: #8B5E3C;
+
+  --color-background: var(--color-bg-primary);
+  --color-foreground: var(--color-text-primary);
+  --color-card: var(--color-bg-card);
+  --color-muted: var(--color-text-muted);
+  --color-border: var(--app-border);
+  --color-input: var(--app-input);
+  --color-ring: var(--app-ring);
+  --color-card-foreground: var(--app-card-foreground);
+  --color-primary-foreground: var(--app-primary-foreground);
+  --color-destructive: var(--app-destructive);
+  --color-destructive-foreground: var(--app-destructive-foreground);
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand-brown) 22%, transparent);
+  color: var(--color-text-primary);
+}

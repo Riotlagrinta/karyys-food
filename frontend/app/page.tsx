@@ -9,6 +9,7 @@ import {
   CardFooter,
 } from "@/components/ui/Card";
 import { AIAssistantWidget } from "@/components/ai/AIAssistantWidget";
+import { AITriggerButton } from "@/components/ai/AITriggerButton";
 import { GourmetPreview } from "@/components/menu/GourmetPreview";
 import Link from "next/link";
 import Image from "next/image";
@@ -167,13 +168,17 @@ export default async function Home() {
             <p className="text-xs text-muted mt-0.5">Ingrédients nobles</p>
           </div>
 
-          <div className="flex flex-col items-center p-4 rounded-2xl bg-card/60 border border-border/70 backdrop-blur-md shadow-xs transition-all hover:border-brand-rose/40 hover:scale-[1.02]">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-rose/20 to-primary/20 text-brand-rose flex items-center justify-center mb-2.5">
+          {/* Sommelier IA Trigger Card */}
+          <AITriggerButton
+            variant="card"
+            className="flex flex-col items-center p-4 rounded-2xl bg-card/60 border border-border/70 backdrop-blur-md shadow-xs transition-all hover:border-brand-rose/60 hover:scale-[1.02] text-left group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-rose/20 to-primary/20 text-brand-rose flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
               <Bot className="w-5 h-5" />
             </div>
-            <h2 className="text-sm font-bold text-foreground">Sommelier IA</h2>
-            <p className="text-xs text-muted mt-0.5">Conseils personnalisés</p>
-          </div>
+            <h2 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Sommelier IA</h2>
+            <p className="text-xs text-muted mt-0.5">Cliquez pour des conseils</p>
+          </AITriggerButton>
         </div>
       </section>
 
@@ -279,7 +284,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Floating AI Sommelier with 3D Avatar */}
+      {/* AI Modal Drawer (renders only when opened) */}
       <AIAssistantWidget />
     </div>
   );

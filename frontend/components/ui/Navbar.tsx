@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CartIcon } from "@/components/ui/CartIcon";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
+import { AITriggerButton } from "@/components/ai/AITriggerButton";
 import { User, LogOut, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/auth/actions";
@@ -49,7 +50,7 @@ export async function Navbar() {
         </Link>
 
         {/* Navigation Actions */}
-        <nav className="flex items-center gap-2 sm:gap-4">
+        <nav className="flex items-center gap-2 sm:gap-3.5">
           <Link
             href="/menu"
             className="px-3.5 py-1.5 rounded-full text-sm font-medium text-muted hover:text-foreground hover:bg-muted/40 transition-all flex items-center gap-1.5"
@@ -77,6 +78,9 @@ export async function Navbar() {
           )}
 
           <div className="h-5 w-px bg-border/60 mx-1 hidden sm:block" />
+
+          {/* AI Sommelier Trigger Button (Discret & Élégant) */}
+          <AITriggerButton variant="navbar" />
 
           <ThemeToggle />
           <NotificationBell userId={user?.id} />

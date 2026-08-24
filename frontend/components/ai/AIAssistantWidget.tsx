@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Sparkles, X, Send, Loader2, ChefHat } from "lucide-react";
+import Image from "next/image";
+import { Sparkles, X, Send, Loader2 } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -80,16 +81,23 @@ export function AIAssistantWidget() {
 
   return (
     <>
-      {/* Floating Glowing Button */}
+      {/* Floating Glowing Button with 3D Chef Avatar */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-20 md:bottom-6 left-6 p-3.5 sm:p-4 bg-gradient-to-r from-primary via-brand-brown-light to-brand-rose text-white rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-40 flex items-center justify-center gap-2 group border border-white/20 cursor-pointer"
+        className="fixed bottom-20 md:bottom-6 left-6 p-2 bg-gradient-to-r from-primary via-brand-brown-light to-brand-rose text-white rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-40 flex items-center justify-center gap-2.5 group border border-white/30 cursor-pointer animate-soft-pulse"
         aria-label="Conseiller Culinaire IA Karyy's"
         title="Discuter avec le Chef IA"
       >
-        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse text-amber-200" />
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-xs sm:text-sm font-bold pr-1">
-          Chef IA
+        <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/50 shadow-inner">
+          <Image
+            src="/images/3d/chef_ai_avatar_3d.jpg"
+            alt="Chef IA 3D"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-xs sm:text-sm font-bold pr-2">
+          Chef IA 3D
         </span>
       </button>
 
@@ -102,17 +110,23 @@ export function AIAssistantWidget() {
           />
 
           <div className="relative w-full max-w-md bg-card rounded-3xl shadow-2xl border border-border/80 flex flex-col h-[540px] max-h-[85vh] pointer-events-auto overflow-hidden animate-in slide-in-from-bottom duration-300">
-            {/* Gourmet Header */}
+            {/* Gourmet Header with 3D Chef Character */}
             <div className="bg-gradient-to-r from-primary via-brand-brown-light to-brand-rose text-white p-4 flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center border border-white/30 backdrop-blur-xs">
-                  <ChefHat className="w-5 h-5 text-amber-200" />
+                <div className="relative w-11 h-11 rounded-2xl overflow-hidden border-2 border-white/40 shadow-sm bg-white/20">
+                  <Image
+                    src="/images/3d/chef_ai_avatar_3d.jpg"
+                    alt="Chef IA Sommelier 3D"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base font-serif text-white">
-                    Chef &amp; Sommelier IA
+                  <h3 className="font-bold text-base font-serif text-white flex items-center gap-1.5">
+                    <span>Chef &amp; Sommelier IA</span>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-200" />
                   </h3>
-                  <p className="text-[11px] text-white/80">Karyy&apos;s Food Concierge</p>
+                  <p className="text-[11px] text-white/80">Concierge Culinaire Karyy&apos;s</p>
                 </div>
               </div>
               <button

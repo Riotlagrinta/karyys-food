@@ -124,18 +124,33 @@ body {
   background: color-mix(in srgb, var(--color-brand-brown) 50%, transparent);
 }
 
-/* Smooth Pulse Animation */
-@keyframes softPulse {
+/* 3D Animations & Transforms */
+@keyframes float3D {
   0%, 100% {
-    transform: scale(1);
-    opacity: 1;
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: scale(1.03);
-    opacity: 0.92;
+    transform: translateY(-10px) rotate(1deg);
   }
 }
 
-.animate-soft-pulse {
-  animation: softPulse 3s ease-in-out infinite;
+@keyframes floatReverse3D {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3D 5s ease-in-out infinite;
+}
+
+.animate-float-reverse-3d {
+  animation: floatReverse3D 6s ease-in-out infinite;
+}
+
+.shadow-3d-card {
+  box-shadow: 0 20px 35px -10px rgba(92, 58, 30, 0.18), 0 0 15px 0 rgba(196, 127, 160, 0.12);
 }

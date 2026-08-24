@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import MenuClient from "./MenuClient";
 import { AIAssistantWidget } from "@/components/ai/AIAssistantWidget";
+import { Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,13 +17,18 @@ export default async function MenuPage() {
   const menuItems = menuItemsResult.data || [];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="mb-8 space-y-4">
-        <h1 className="text-4xl font-serif font-bold text-brand-light">
-          Notre Menu
+    <div className="container mx-auto px-4 py-8 sm:py-10 max-w-7xl">
+      {/* Menu Header Banner */}
+      <div className="mb-8 space-y-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-rose/10 border border-brand-rose/20 text-brand-rose text-xs font-bold tracking-wide">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>CARTE GASTRONOMIQUE DU JOUR</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground tracking-tight">
+          Notre Menu Gourmand
         </h1>
-        <p className="text-muted text-lg max-w-2xl">
-          Découvrez nos spécialités, des plats traditionnels africains aux classiques occidentaux en passant par nos délicieuses pâtisseries.
+        <p className="text-muted text-sm sm:text-base max-w-2xl leading-relaxed">
+          Pâtisseries artisanales, douceurs sucrées et grands classiques de la cuisine africaine et occidentale. Préparés chaque jour avec amour et fraîcheur.
         </p>
       </div>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CartIcon } from "@/components/ui/CartIcon";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
-import { User, LogOut } from "lucide-react";
+import { User, LogOut, Utensils, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/auth/actions";
 
@@ -17,73 +17,91 @@ export async function Navbar() {
   if (user) {
     const { data } = await supabase
       .from("profiles")
-      .select("role")
+      .select("role, full_name")
       .eq("id", user.id)
       .single();
     profile = data;
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-0 bg-transparent backdrop-blur-md transition-all shadow-none">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-8">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="font-serif text-2xl font-bold text-brand">
-            Karyy's Food
-          </span>
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md transition-all">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Logo */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-brand-rose flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
+            <Utensils className="w-4 h-4" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+              Karyy&apos;s Food
+            </span>
+            <span className="text-[10px] text-muted -mt-1 hidden sm:block tracking-wide">
+              Pâtisserie &amp; Restauration
+            </span>
+          </div>
         </Link>
-        <nav className="flex items-center gap-4 sm:gap-6">
+
+        {/* Navigation Actions */}
+        <nav className="flex items-center gap-2 sm:gap-4">
           <Link
             href="/menu"
-            className="text-sm font-medium text-muted hover:text-brand transition-colors"
+            className="px-3.5 py-1.5 rounded-full text-sm font-medium text-muted hover:text-foreground hover:bg-muted/40 transition-all flex items-center gap-1.5"
           >
-            Menu
+            <span>Menu Gourmand</span>
+            <Sparkles className="w-3.5 h-3.5 text-brand-rose" />
           </Link>
 
           {profile?.role === "admin" && (
             <Link
               href="/admin/dashboard"
-              className="text-xs font-bold px-3 py-1.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-xs"
+              className="text-xs font-bold px-3 py-1.5 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors shadow-xs"
             >
-              Dashboard Admin
+              Admin
             </Link>
           )}
 
           {profile?.role === "deliverer" && (
             <Link
               href="/delivery/dashboard"
-              className="text-xs font-bold px-3 py-1.5 bg-amber-700 text-white rounded-lg hover:bg-amber-800 transition-colors shadow-xs"
+              className="text-xs font-bold px-3 py-1.5 bg-amber-700 text-white rounded-full hover:bg-amber-800 transition-colors shadow-xs"
             >
-              Espace Livreur
+              Livreur
             </Link>
           )}
-          
+
+          <div className="h-5 w-px bg-border/60 mx-1 hidden sm:block" />
+
           <ThemeToggle />
           <NotificationBell userId={user?.id} />
           <CartIcon />
 
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 pl-1">
               <Link
                 href="/profile"
-                className="flex items-center gap-2 text-sm font-medium text-muted hover:text-brand transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/80 bg-card/60 hover:bg-muted/40 text-sm font-medium text-foreground transition-all shadow-xs"
+                title="Mon profil"
               >
-                <User className="w-5 h-5" />
-                <span className="hidden sm:inline">Mon Profil</span>
+                <User className="w-4 h-4 text-primary" />
+                <span className="hidden md:inline max-w-[100px] truncate text-xs font-medium">
+                  {profile?.full_name || "Mon Profil"}
+                </span>
               </Link>
               <form action={logout} className="hidden sm:block">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-primary transition-colors"
+                  className="p-2 rounded-full border border-border/60 hover:bg-destructive/10 hover:text-destructive text-muted transition-colors cursor-pointer"
+                  title="Déconnexion"
+                  aria-label="Déconnexion"
                 >
-                  <LogOut className="w-5 h-5" />
-                  <span className="hidden sm:inline">Déconnexion</span>
+                  <LogOut className="w-4 h-4" />
                 </button>
               </form>
             </div>
           ) : (
             <Link
               href="/login"
-              className="text-sm font-medium text-muted hover:text-brand transition-colors"
+              className="px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-xs ml-1"
             >
               Connexion
             </Link>

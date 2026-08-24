@@ -21,7 +21,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 
 async function createAdmin(email: string, full_name: string) {
   // Create user
-  const { data: user, error: createError } = await supabase.auth.admin.createUser({
+  const { error: createError } = await supabase.auth.admin.createUser({
     email,
     password: "password123", // Default password
     email_confirm: true,
@@ -66,7 +66,7 @@ async function createAdmin(email: string, full_name: string) {
 async function main() {
   console.log("Creating admin accounts...");
   await createAdmin("admin@karyysfood.com", "Karyy Admin");
-  await createAdmin("kelvyn@karyysfood.com", "Kelvyn Admin"); // User's account
+  await createAdmin("kelvyn@karyysfood.com", "Kelvyn Admin");
   console.log("Done.");
 }
 

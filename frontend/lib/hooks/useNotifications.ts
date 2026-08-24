@@ -1,20 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
+
+function getNotificationPermissionSnapshot(): NotificationPermission {
+  if (typeof window !== "undefined" && "Notification" in window) {
+    return Notification.permission;
+  }
+  return "default";
+}
 
 export function useNotifications() {
-  const [permission, setPermission] = useState<NotificationPermission>("default");
+  const browserPermission = useSyncExternalStore(
+    emptySubscribe,
+    getNotificationPermissionSnapshot,
+    () => "default" as NotificationPermission
+  );
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && "Notification" in window) {
-      setPermission(Notification.permission);
-    }
-  }, []);
+  const [overridePermission, setOverridePermission] = useState<NotificationPermission | null>(null);
+
+  const permission = overridePermission ?? browserPermission;
 
   const requestPermission = async () => {
     if (typeof window !== "undefined" && "Notification" in window) {
       const result = await Notification.requestPermission();
-      setPermission(result);
+      setOverridePermission(result);
       return result;
     }
     return "denied";
@@ -30,7 +41,7 @@ export function useNotifications() {
       if ("vibrate" in navigator) {
         try {
           navigator.vibrate([200, 100, 200]);
-        } catch (e) {
+        } catch {
           // Vibration ignore if restricted
         }
       }

@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
           response = NextResponse.next({
@@ -53,8 +53,6 @@ export async function middleware(request: NextRequest) {
     if (!user) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
-    // We should ideally check the user's role from public.profiles here,
-    // but doing it safely in middleware requires fetching it:
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -82,7 +80,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Protect /profile or /order tracking (optional)
+  // Protect /profile or /order tracking
   if (
     request.nextUrl.pathname.startsWith("/profile") ||
     request.nextUrl.pathname.startsWith("/order/confirm")

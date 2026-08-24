@@ -5,40 +5,41 @@
   --color-brand-brown-light: #8B5E3C;
   --color-brand-rose: #C47FA0;
   --color-brand-rose-light: #E8B4CC;
+  --color-brand-gold: #D4A373;
 
   color-scheme: light;
 
-  /* Mode Clair par défaut */
-  --color-bg-primary: #faf7f5;
-  --color-bg-secondary: #f3ece6;
-  --color-bg-card: #fffdfb;
-  --color-text-primary: #2a221c;
-  --color-text-muted: #76675d;
-  --app-border: #e6d8ce;
-  --app-input: #f7f2ee;
-  --app-ring: #8b5e3c;
-  --app-card-foreground: #2a221c;
-  --app-primary-foreground: #ffffff;
-  --app-destructive: #b91c1c;
-  --app-destructive-foreground: #ffffff;
+  /* Mode Clair raffiné et gourmand */
+  --color-bg-primary: #FAF7F5;
+  --color-bg-secondary: #F3ECE6;
+  --color-bg-card: #FFFFFF;
+  --color-text-primary: #2A221C;
+  --color-text-muted: #76675D;
+  --app-border: #EADBCE;
+  --app-input: #F7F2EE;
+  --app-ring: #8B5E3C;
+  --app-card-foreground: #2A221C;
+  --app-primary-foreground: #FFFFFF;
+  --app-destructive: #B91C1C;
+  --app-destructive-foreground: #FFFFFF;
 }
 
 .dark {
   color-scheme: dark;
 
-  /* Mode Sombre Adouci (moins prononcé que le noir pur) */
-  --color-bg-primary: #1f1915;
-  --color-bg-secondary: #2b231d;
-  --color-bg-card: #362c25;
-  --color-text-primary: #f5ede8;
-  --color-text-muted: #b29f91;
-  --app-border: #4a3a31;
-  --app-input: #2f261f;
-  --app-ring: #e8b4cc;
-  --app-card-foreground: #f5ede8;
-  --app-primary-foreground: #ffffff;
-  --app-destructive: #f87171;
-  --app-destructive-foreground: #ffffff;
+  /* Mode Sombre chaleureux (café & chocolat intense) */
+  --color-bg-primary: #181310;
+  --color-bg-secondary: #221B16;
+  --color-bg-card: #2B231D;
+  --color-text-primary: #F7EFE9;
+  --color-text-muted: #B8A89C;
+  --app-border: #3E322A;
+  --app-input: #261F1A;
+  --app-ring: #E8B4CC;
+  --app-card-foreground: #F7EFE9;
+  --app-primary-foreground: #FFFFFF;
+  --app-destructive: #F87171;
+  --app-destructive-foreground: #FFFFFF;
 }
 
 @theme inline {
@@ -46,6 +47,7 @@
   --color-brand-light: var(--color-brand-brown-light);
   --color-rose: var(--color-brand-rose);
   --color-rose-light: var(--color-brand-rose-light);
+  --color-gold: var(--color-brand-gold);
 
   --color-primary: #5C3A1E;
   --color-primary-hover: #452A14;
@@ -63,17 +65,77 @@
   --color-destructive: var(--app-destructive);
   --color-destructive-foreground: var(--app-destructive-foreground);
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
 }
 
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-brand-brown) 22%, transparent);
+  background: color-mix(in srgb, var(--color-brand-brown) 25%, transparent);
   color: var(--color-text-primary);
+}
+
+/* Glassmorphism & Modern Helpers */
+.glass-panel {
+  background: color-mix(in srgb, var(--color-bg-card) 78%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--app-border) 65%, transparent);
+}
+
+.glass-pill {
+  background: color-mix(in srgb, var(--color-bg-card) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--app-border) 80%, transparent);
+}
+
+.glow-rose {
+  box-shadow: 0 0 25px -5px rgba(196, 127, 160, 0.25);
+}
+
+.glow-brand {
+  box-shadow: 0 0 30px -5px rgba(92, 58, 30, 0.35);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-brand-brown) 30%, transparent);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-brand-brown) 50%, transparent);
+}
+
+/* Smooth Pulse Animation */
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.92;
+  }
+}
+
+.animate-soft-pulse {
+  animation: softPulse 3s ease-in-out infinite;
 }

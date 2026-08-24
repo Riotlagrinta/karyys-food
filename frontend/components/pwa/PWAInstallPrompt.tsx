@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Download, X, Share, PlusSquare } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -71,8 +72,13 @@ export function PWAInstallPrompt() {
   return (
     <div className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[120] animate-in slide-in-from-bottom duration-300">
       <div className="bg-card/95 backdrop-blur-md border border-border/80 rounded-3xl shadow-2xl p-4 flex items-center gap-4 relative overflow-hidden">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary to-brand-rose flex items-center justify-center text-white shrink-0 font-serif font-bold text-xl shadow-md">
-          K
+        <div className="relative w-12 h-12 rounded-2xl overflow-hidden border border-border shrink-0 shadow-md bg-[#FAF7F5]">
+          <Image
+            src="/Karyys_Logo.jpg"
+            alt="Logo Karyy's Food"
+            fill
+            className="object-cover"
+          />
         </div>
 
         <div className="flex-1 pr-6">

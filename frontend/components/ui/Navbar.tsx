@@ -1,9 +1,10 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CartIcon } from "@/components/ui/CartIcon";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
-import { User, LogOut, Utensils, Sparkles } from "lucide-react";
+import { User, LogOut, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/auth/actions";
 
@@ -26,10 +27,16 @@ export async function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md transition-all">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Logo */}
+        {/* Brand Logo with Official Emblem Image */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-brand-rose flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
-            <Utensils className="w-4 h-4" />
+          <div className="relative w-10 h-10 rounded-2xl overflow-hidden border border-border/80 shadow-xs group-hover:scale-105 transition-transform bg-[#FAF7F5]">
+            <Image
+              src="/Karyys_Logo.jpg"
+              alt="Logo Karyy's Food"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
           <div className="flex flex-col">
             <span className="font-serif text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">

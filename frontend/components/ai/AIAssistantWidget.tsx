@@ -18,6 +18,7 @@ const QUICK_SUGGESTIONS = [
 
 export function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -81,25 +82,42 @@ export function AIAssistantWidget() {
 
   return (
     <>
-      {/* Floating Glowing Button with 3D Chef Avatar */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-20 md:bottom-6 left-6 p-2 bg-gradient-to-r from-primary via-brand-brown-light to-brand-rose text-white rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all z-40 flex items-center justify-center gap-2.5 group border border-white/30 cursor-pointer animate-soft-pulse"
-        aria-label="Conseiller Culinaire IA Karyy's"
-        title="Discuter avec le Chef IA"
-      >
-        <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/50 shadow-inner">
-          <Image
-            src="/images/3d/chef_ai_avatar_3d.jpg"
-            alt="Chef IA 3D"
-            fill
-            className="object-cover"
-          />
+      {/* Floating Glowing Button with 3D Chef Avatar & Dismiss Button */}
+      {!isDismissed && (
+        <div className="fixed bottom-20 md:bottom-6 left-4 md:left-6 z-40 flex items-center group animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="p-1.5 sm:p-2 bg-gradient-to-r from-primary via-brand-brown-light to-brand-rose text-white rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 group/btn border border-white/30 cursor-pointer animate-soft-pulse"
+            aria-label="Conseiller Culinaire IA Karyy's"
+            title="Discuter avec le Chef IA"
+          >
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/50 shadow-inner">
+              <Image
+                src="/images/3d/chef_ai_avatar_3d.jpg"
+                alt="Chef IA 3D"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <span className="max-w-0 overflow-hidden group-hover/btn:max-w-xs transition-all duration-300 whitespace-nowrap text-xs sm:text-sm font-bold pr-2">
+              Chef IA
+            </span>
+          </button>
+
+          {/* Dismiss / Hide button (X) */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsDismissed(true);
+            }}
+            className="ml-1 p-1 rounded-full bg-background/80 hover:bg-background border border-border/80 text-muted hover:text-foreground shadow-xs transition-all cursor-pointer opacity-80 hover:opacity-100"
+            title="Masquer le bouton IA"
+            aria-label="Masquer le bouton IA"
+          >
+            <X className="w-3 h-3" />
+          </button>
         </div>
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-xs sm:text-sm font-bold pr-2">
-          Chef IA 3D
-        </span>
-      </button>
+      )}
 
       {/* Chat Drawer / Modal */}
       {isOpen && (
